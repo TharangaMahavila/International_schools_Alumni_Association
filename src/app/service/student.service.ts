@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Student} from "../model/Student";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
+
+  profileImageUrl = '';
+  dataSource = new MatTableDataSource<Student>();
 
   constructor() { }
 
@@ -26,7 +30,8 @@ export class StudentService {
     dsDivision: new FormControl('',[Validators.required]),
     gnDivision: new FormControl('',[Validators.required]),
     language: new FormControl('',[Validators.required]),
-    experience: new FormControl('',[Validators.required]),
+    experienceInYear: new FormControl('',[Validators.required]),
+    experienceInMonth: new FormControl(''),
     isFollowed: new FormControl(false,[Validators.required]),
     courseDuration: new FormControl(''),
     hasImage: new FormControl(false,[Validators.required]),

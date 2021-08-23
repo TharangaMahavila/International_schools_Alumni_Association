@@ -10,6 +10,12 @@ import { StudentComponent } from './view/student/student.component';
 import {StudentService} from "./service/student.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatInputModule} from "@angular/material/input";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
 
 
 @NgModule({
@@ -23,6 +29,12 @@ import {MatInputModule} from "@angular/material/input";
     MatCardModule,
     FormsModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatTableModule,
+    MatSortModule,
     ReactiveFormsModule,
     MatFormFieldModule
   ],
