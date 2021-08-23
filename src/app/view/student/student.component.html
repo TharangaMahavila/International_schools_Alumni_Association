@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <h4>Student Registration</h4>
+      </div>
+    </div>
+    <div>
+      <mat-card>
+        <form [formGroup]="studentService.form">
+          <mat-card-content>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>City</mat-label>
+                      <input matInput placeholder="Ex. San Francisco">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <mat-form-field [style.width.%]=100>
+                      <mat-label>Last Name </mat-label>
+                      <input matInput formControlName="lname">
+                      <mat-error *ngIf="studentService.registerFormControl.lname.invalid">
+                        {{studentService.registerFormControl.lname.hasError('minlength')? 'Last name should have at least three characters': ''}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <mat-form-field [style.width.%]=100>
+                      <mat-label>Other Name </mat-label>
+                      <input matInput formControlName="lname">
+                      <mat-error *ngIf="studentService.registerFormControl.oname.invalid">
+                        {{studentService.registerFormControl.oname.hasError('minlength')? 'Other name should have at least three characters': ''}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>
