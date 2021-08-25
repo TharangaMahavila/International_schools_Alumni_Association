@@ -16,6 +16,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
+import {MatButtonModule} from "@angular/material/button";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -35,8 +37,10 @@ import {MatSortModule} from "@angular/material/sort";
     MatIconModule,
     MatTableModule,
     MatSortModule,
+    MatButtonModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HttpClientModule
   ],
   providers: [StudentService],
   bootstrap: [AppComponent],

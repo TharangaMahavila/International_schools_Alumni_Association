@@ -214,46 +214,45 @@
   </div>
 
   <div>
-    <table class="studentTable" mat-table [dataSource]="studentService.dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-      <div class="row">
-        <div class="col-12">
-          <!-- Registration Column -->
-          <ng-container matColumnDef="RegNo">
-            <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
+      <!-- Register number Column -->
+      <ng-container matColumnDef="RegNo">
+        <th mat-header-cell *matHeaderCellDef>Reg No</th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="Name">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let element"> {{element.initial}} {{element.fname}} {{element.lname}} </td>
-          </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
 
-          <!-- Gender Column -->
-          <ng-container matColumnDef="Gender">
-            <th mat-header-cell *matHeaderCellDef>Gender</th>
-            <td mat-cell *matCellDef="let element"> {{element.gender.toLowerCase()}} </td>
-          </ng-container>
+      <!-- Gender Column -->
+      <ng-container matColumnDef="Gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
 
-          <!-- Address Column -->
-          <ng-container matColumnDef="Address">
-            <th mat-header-cell *matHeaderCellDef>Address</th>
-            <td mat-cell *matCellDef="let element">{{element.line1}},{{element.line2}}</td>
-          </ng-container>
+      <!-- Address Column -->
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
 
-          <!-- Contact Column -->
-          <ng-container matColumnDef="Contact">
-            <th mat-header-cell *matHeaderCellDef>Contact</th>
-            <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
-          </ng-container>
+      <!-- Contact Column -->
+      <ng-container matColumnDef="Contact">
+        <th mat-header-cell *matHeaderCellDef> Contact </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
 
-        </div>
-      </div>
+      <ng-container matColumnDef="View">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="downloadPdf(element.id)">Download pdf</button></td>
+      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr [ngClass]="{'selected': row.regNo==selectedRow}" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedStudent(row)"></tr>
-
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 </div>

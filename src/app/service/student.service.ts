@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Student} from "../model/Student";
 import {MatTableDataSource} from "@angular/material/table";
+import {Observable} from "rxjs";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {ConfigService} from "./config.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,7 @@ export class StudentService {
   profileImageUrl = '';
   dataSource = new MatTableDataSource<Student>();
 
-  constructor() { }
+  constructor(private http: HttpClient, private configService: ConfigService) { }
 
   form: FormGroup = new FormGroup({
     id: new FormControl('',),
@@ -90,5 +93,9 @@ export class StudentService {
 
   get registerFormControl(){
     return this.form.controls;
+  }
+
+  getAllStudents(): Observable<Array<Student>>{
+    return this.http.get<Array<Student>>(this.configService.BASE_URL+`/api/v1/student`,{});
   }
 }

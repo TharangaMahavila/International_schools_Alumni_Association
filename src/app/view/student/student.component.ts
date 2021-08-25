@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StudentService} from "../../service/student.service";
+import {Student} from "../../model/Student";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-student',
@@ -8,12 +10,22 @@ import {StudentService} from "../../service/student.service";
 })
 export class StudentComponent implements OnInit {
 
-  labelPosition: 'Male' | 'Female' = 'Female';
-  displayedColumns: string[] = ['RegNo', 'Name', 'Gender', 'Address', 'Contact'];
+  displayedColumns: string[] = ['RegNo', 'Name', 'Gender', 'Address', 'Contact', 'View'];
+  students: Student[] = [];
+  dataSource = new MatTableDataSource<Student>();
 
   constructor(public studentService: StudentService) { }
 
   ngOnInit(): void {
+    // this.getAllStudents();
+  }
+
+  getAllStudents(): void{
+    this.studentService.getAllStudents().subscribe(value => {
+      this.students = value;
+    },error => {
+      alert('Something went wrong')
+    });
   }
 
   onFileSelect(event: Event) {
@@ -25,5 +37,9 @@ export class StudentComponent implements OnInit {
     reader.onload = (e:any) =>{
       this.studentService.profileImageUrl = e.target.result;
     }
+  }
+
+  downloadPdf(id: string) {
+    alert(id);
   }
 }
