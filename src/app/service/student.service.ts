@@ -11,6 +11,7 @@ import {ConfigService} from "./config.service";
 })
 export class StudentService {
 
+  selectedImage!: File;
   profileImageUrl = '';
   dataSource = new MatTableDataSource<Student>();
 
@@ -29,12 +30,11 @@ export class StudentService {
     date: new FormControl('',[Validators.required]),
     month: new FormControl('',[Validators.required]),
     year:  new FormControl('',[Validators.required]),
-    gender:new FormControl('male',[Validators.required]),
+    gender:new FormControl('MALE',[Validators.required]),
     dsDivision: new FormControl('',[Validators.required]),
     gnDivision: new FormControl('',[Validators.required]),
     language: new FormControl('',[Validators.required]),
-    experienceInYear: new FormControl('',[Validators.required]),
-    experienceInMonth: new FormControl(''),
+    experience: new FormControl('',[Validators.required]),
     isFollowed: new FormControl(false,[Validators.required]),
     courseDuration: new FormControl(''),
     hasImage: new FormControl(false,[Validators.required]),
@@ -54,7 +54,7 @@ export class StudentService {
       date: '',
       month: '',
       year: '',
-      gender: 'male',
+      gender: 'MALE',
       dsDivision: '',
       gnDivision: '',
       language: '',
@@ -97,5 +97,15 @@ export class StudentService {
 
   getAllStudents(): Observable<Array<Student>>{
     return this.http.get<Array<Student>>(this.configService.BASE_URL+`/api/v1/student`,{});
+  }
+
+  saveStudent(student: Student,):Observable<Student>{
+    const fd = new FormData();
+    if(this.profileImageUrl !== ''){
+      fd.append('file',this.selectedImage,this.selectedImage.name);
+      student.hasImage = true;
+    }
+    fd.append('body',JSON.stringify(student));
+    return this.http.post<Student>(this.configService.BASE_URL+`/api/v1/student`,fd);
   }
 }

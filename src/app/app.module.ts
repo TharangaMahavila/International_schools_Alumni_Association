@@ -18,6 +18,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatButtonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule
   ],
   providers: [StudentService],
   bootstrap: [AppComponent],

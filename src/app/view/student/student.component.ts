@@ -13,11 +13,12 @@ export class StudentComponent implements OnInit {
   displayedColumns: string[] = ['RegNo', 'Name', 'Gender', 'Address', 'Contact', 'View'];
   students: Student[] = [];
   dataSource = new MatTableDataSource<Student>();
+  panelOpenState = false;
 
   constructor(public studentService: StudentService) { }
 
   ngOnInit(): void {
-    // this.getAllStudents();
+    this.getAllStudents();
   }
 
   getAllStudents(): void{
@@ -30,7 +31,7 @@ export class StudentComponent implements OnInit {
 
   onFileSelect(event: Event) {
     // @ts-ignore
-    this.selectedImage = (event.target as HTMLInputElement).files[0];
+    this.studentService.selectedImage = (event.target as HTMLInputElement).files[0];
     let reader = new FileReader();
     // @ts-ignore
     reader.readAsDataURL((event.target as HTMLInputElement).files[0]);
@@ -41,5 +42,27 @@ export class StudentComponent implements OnInit {
 
   downloadPdf(id: string) {
     alert(id);
+  }
+
+  preventToggle(event: Event) {
+    event.stopPropagation();
+    this.panelOpenState;
+  }
+
+  registerStudent() {
+   if(this.studentService.form.valid){
+      let student = this.studentService.form.value;
+     this.studentService.saveStudent(student).subscribe(value => {
+       alert("Student saved successfully");
+       this.studentService.profileImageUrl = '';
+       this.studentService.form.reset();
+       this.studentService.form.clearValidators();
+       this.studentService.initializeFormGroup();
+     },error => {
+       alert(error.error);
+     })
+   }else {
+     alert('Please provide all required fields and valid data.')
+   }
   }
 }

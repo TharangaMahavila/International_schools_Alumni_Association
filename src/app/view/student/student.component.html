@@ -1,215 +1,226 @@
 <div class="container">
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-12">
       <div class="row">
         <div class="col-12 d-flex justify-content-center">
           <h4>International schools Alumni Association</h4>
         </div>
       </div>
-      <div>
-        <mat-card>
-          <form [formGroup]="studentService.form">
-            <mat-card-content>
-              <div class="row">
-                <div class="col-12">
+      <mat-accordion>
+        <mat-expansion-panel hideToggle [expanded]="panelOpenState">
+          <mat-expansion-panel-header (click)="preventToggle($event)">
+            <mat-panel-description class="d-flex justify-content-end">
+              <button mat-raised-button color="primary" (click)="!panelOpenState">Add Student
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div>
+            <mat-card>
+              <form #frm [formGroup]="studentService.form" (ngSubmit)="registerStudent()">
+                <mat-card-content>
                   <div class="row">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12">
                       <div class="row">
-                        <div class="d-flex justify-content-center align-items-center">
-                          <div class="profilePhoto img-fluid">
-                            <img [src]="studentService.profileImageUrl === '' ? '../../../../assets/images/user-picture.png' : studentService.profileImageUrl" class="profilePhoto img-fluid">
-                            <div class="edit">
-                              <form (ngSubmit)="$event.stopPropagation()">
-                                <input #fileInput type="file" accept="image/*" style="display: none" (change)="onFileSelect($event)">
-                                <button (click)="fileInput.click()"><span class=""><mat-icon matSuffix>mode_edit</mat-icon></span></button>
-                              </form>
+                        <div class="col-12 col-md-4">
+                          <div class="row">
+                            <div class="d-flex justify-content-center align-items-center">
+                              <div class="profilePhoto img-fluid">
+                                <img [src]="studentService.profileImageUrl === '' ? '../../../../assets/images/user-picture.png' : studentService.profileImageUrl" class="profilePhoto img-fluid">
+                                <div class="edit">
+                                  <form (ngSubmit)="$event.stopPropagation()">
+                                    <input #fileInput type="file" accept="image/*" style="display: none" (change)="onFileSelect($event)">
+                                    <button (click)="fileInput.click()"><span class=""><mat-icon matSuffix>mode_edit</mat-icon></span></button>
+                                  </form>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div class="col-12 col-md-8">
+                          <div class="row">
+
+                            <div class="col-12 col-md-4">
+                              <mat-form-field [style.width.%]=100 appearance="outline">
+                                <mat-label>First Name </mat-label>
+                                <input matInput formControlName="fname" required>
+                                <mat-error *ngIf="studentService.registerFormControl.fname.invalid">
+                                  {{studentService.registerFormControl.fname.hasError('minlength')? 'First name should have at least three characters': ''}}
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                              <mat-form-field [style.width.%]=100 appearance="outline">
+                                <mat-label>Last Name </mat-label>
+                                <input matInput formControlName="lname">
+                                <mat-error *ngIf="studentService.registerFormControl.lname.invalid">
+                                  {{studentService.registerFormControl.lname.hasError('minlength')? 'Last name should have at least three characters': ''}}
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                              <mat-form-field [style.width.%]=100 appearance="outline">
+                                <mat-label>Other Name </mat-label>
+                                <input matInput formControlName="lname">
+                                <mat-error *ngIf="studentService.registerFormControl.oname.invalid">
+                                  {{studentService.registerFormControl.oname.hasError('minlength')? 'Other name should have at least three characters': ''}}
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+
+                            <div class="col-12 col-md-6">
+                              <mat-form-field [style.width.%]=100 appearance="outline">
+                                <mat-label>Address Line 1</mat-label>
+                                <input matInput formControlName="line1" required>
+                                <mat-error *ngIf="studentService.registerFormControl.line1.invalid">
+                                  {{studentService.registerFormControl.line1.hasError('minlength')? 'Address should have at least three characters': ''}}
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                              <mat-form-field [style.width.%]=100 appearance="outline">
+                                <mat-label>Address Line 2</mat-label>
+                                <input matInput formControlName="line2">
+                                <mat-error *ngIf="studentService.registerFormControl.line2.invalid">
+                                  {{studentService.registerFormControl.line2.hasError('minlength')? 'Address should have at least three characters': ''}}
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-12 col-md-8">
                       <div class="row">
 
                         <div class="col-12 col-md-4">
                           <mat-form-field [style.width.%]=100 appearance="outline">
-                            <mat-label>First Name </mat-label>
-                            <input matInput formControlName="fname" required>
-                            <mat-error *ngIf="studentService.registerFormControl.fname.invalid">
-                              {{studentService.registerFormControl.fname.hasError('minlength')? 'First name should have at least three characters': ''}}
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput formControlName="contact">
+                            <mat-error *ngIf="studentService.registerFormControl.contact.invalid">
+                              {{studentService.registerFormControl.contact.hasError('minlength')? 'Invalid mobile number': ''}}
                             </mat-error>
                           </mat-form-field>
                         </div>
 
                         <div class="col-12 col-md-4">
                           <mat-form-field [style.width.%]=100 appearance="outline">
-                            <mat-label>Last Name </mat-label>
-                            <input matInput formControlName="lname">
-                            <mat-error *ngIf="studentService.registerFormControl.lname.invalid">
-                              {{studentService.registerFormControl.lname.hasError('minlength')? 'Last name should have at least three characters': ''}}
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email">
+                            <mat-error *ngIf="studentService.registerFormControl.email.invalid">
+                              {{studentService.registerFormControl.email.hasError('minlength')? 'Invalid email': ''}}
                             </mat-error>
                           </mat-form-field>
                         </div>
 
                         <div class="col-12 col-md-4">
                           <mat-form-field [style.width.%]=100 appearance="outline">
-                            <mat-label>Other Name </mat-label>
-                            <input matInput formControlName="lname">
-                            <mat-error *ngIf="studentService.registerFormControl.oname.invalid">
-                              {{studentService.registerFormControl.oname.hasError('minlength')? 'Other name should have at least three characters': ''}}
-                            </mat-error>
+                            <mat-label>ID Number</mat-label>
+                            <input matInput formControlName="nic" required>
                           </mat-form-field>
                         </div>
+
+                      </div>
+                      <div class="row">
+
+                        <div class="col-12 col-md-4">
+                          <mat-form-field [style.width.%]=100 appearance="outline">
+                            <mat-label>Birth year</mat-label>
+                            <input matInput formControlName="year" required>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                          <mat-form-field [style.width.%]=100 appearance="outline">
+                            <mat-label>Birth Month</mat-label>
+                            <input matInput formControlName="month" required>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                          <mat-form-field [style.width.%]=100 appearance="outline">
+                            <mat-label>Birth Date</mat-label>
+                            <input matInput formControlName="date" required>
+                          </mat-form-field>
+                        </div>
+
                       </div>
                       <div class="row">
 
-                        <div class="col-12 col-md-6">
+                        <div class="d-flex justify-content-center col-12 col-md-4">
+                          <section class="example-section">
+                            <mat-radio-group formControlName="gender">
+                              <mat-radio-button class="example-margin" value="MALE">Male</mat-radio-button>
+                              <mat-radio-button class="example-margin" value="FEMALE">Female</mat-radio-button>
+                            </mat-radio-group>
+                          </section>
+                        </div>
+
+                        <div class="col-12 col-md-4">
                           <mat-form-field [style.width.%]=100 appearance="outline">
-                            <mat-label>Address Line 1</mat-label>
-                            <input matInput formControlName="line1" required>
-                            <mat-error *ngIf="studentService.registerFormControl.line1.invalid">
-                              {{studentService.registerFormControl.line1.hasError('minlength')? 'Address should have at least three characters': ''}}
-                            </mat-error>
+                            <mat-label>DS Division</mat-label>
+                            <input matInput formControlName="dsDivision" required>
                           </mat-form-field>
                         </div>
 
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-4">
                           <mat-form-field [style.width.%]=100 appearance="outline">
-                            <mat-label>Address Line 2</mat-label>
-                            <input matInput formControlName="line2">
-                            <mat-error *ngIf="studentService.registerFormControl.line2.invalid">
-                              {{studentService.registerFormControl.line2.hasError('minlength')? 'Address should have at least three characters': ''}}
-                            </mat-error>
+                            <mat-label>GN Division</mat-label>
+                            <input matInput formControlName="gnDivision" required>
                           </mat-form-field>
+                        </div>
+
+                      </div>
+                      <div class="row">
+
+                        <div class="col-12 col-md-4">
+                          <mat-form-field [style.width.%]=100 appearance="outline">
+                            <mat-label>Language</mat-label>
+                            <input matInput formControlName="language" required>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                          <mat-form-field [style.width.%]=100 appearance="outline">
+                            <mat-label>Experience</mat-label>
+                            <input placeholder="1 year 6 months" matInput formControlName="experience" required>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                          <mat-form-field [style.width.%]=100 appearance="outline">
+                            <mat-label>Course duration</mat-label>
+                            <input matInput formControlName="courseDuration" required>
+                          </mat-form-field>
+                        </div>
+
+                      </div>
+                      <div class="row mb-3">
+
+                        <div class="d-flex justify-content-center align-items-center col-12 col-md-4">
+                          <mat-slide-toggle formControlName="isFollowed">Any course followed</mat-slide-toggle>
+                        </div>
+
+                      </div>
+                      <div class="row">
+
+                        <div class="d-flex justify-content-center align-items-center col-12">
+                          <button mat-raised-button color="primary" class="registerButton">Register Student</button>
                         </div>
 
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Mobile Number</mat-label>
-                        <input matInput formControlName="contact">
-                        <mat-error *ngIf="studentService.registerFormControl.contact.invalid">
-                          {{studentService.registerFormControl.contact.hasError('minlength')? 'Invalid mobile number': ''}}
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Email</mat-label>
-                        <input matInput formControlName="email">
-                        <mat-error *ngIf="studentService.registerFormControl.email.invalid">
-                          {{studentService.registerFormControl.email.hasError('minlength')? 'Invalid email': ''}}
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>ID Number</mat-label>
-                        <input matInput formControlName="nic" required>
-                      </mat-form-field>
-                    </div>
-
-                  </div>
-                  <div class="row">
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Birth year</mat-label>
-                        <input matInput formControlName="year" required>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Birth Month</mat-label>
-                        <input matInput formControlName="month" required>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Birth Date</mat-label>
-                        <input matInput formControlName="date" required>
-                      </mat-form-field>
-                    </div>
-
-                  </div>
-                  <div class="row">
-
-                    <div class="d-flex justify-content-center col-12 col-md-4">
-                      <section class="example-section">
-                        <mat-radio-group formControlName="gender">
-                          <mat-radio-button class="example-margin" value="male">Male</mat-radio-button>
-                          <mat-radio-button class="example-margin" value="female">Female</mat-radio-button>
-                        </mat-radio-group>
-                      </section>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>DS Division</mat-label>
-                        <input matInput formControlName="dsDivision" required>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>GN Division</mat-label>
-                        <input matInput formControlName="gnDivision" required>
-                      </mat-form-field>
-                    </div>
-
-                  </div>
-                  <div class="row">
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Language</mat-label>
-                        <input matInput formControlName="language" required>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Experience in year</mat-label>
-                        <input matInput formControlName="experienceInYear" required>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Experience in month</mat-label>
-                        <input matInput formControlName="experienceInMonth" required>
-                      </mat-form-field>
-                    </div>
-
-                  </div>
-                  <div class="row">
-
-                    <div class="d-flex justify-content-center align-items-center col-12 col-md-4">
-                      <mat-slide-toggle formControlName="isFollowed">Any course followed</mat-slide-toggle>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                      <mat-form-field [style.width.%]=100 appearance="outline">
-                        <mat-label>Course duration</mat-label>
-                        <input matInput formControlName="courseDuration" required>
-                      </mat-form-field>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </mat-card-content>
-          </form>
-        </mat-card>
-      </div>
+                </mat-card-content>
+              </form>
+            </mat-card>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </div>
 

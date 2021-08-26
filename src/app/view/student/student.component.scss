@@ -69,3 +69,10 @@
 table {
   width: 100%;
 }
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.registerButton {
+  width: 90%;
+}
