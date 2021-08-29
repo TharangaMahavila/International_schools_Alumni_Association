@@ -45,7 +45,8 @@
                                 <mat-label>First Name </mat-label>
                                 <input matInput formControlName="fname" required>
                                 <mat-error *ngIf="studentService.registerFormControl.fname.invalid">
-                                  {{studentService.registerFormControl.fname.hasError('minlength')? 'First name should have at least three characters': ''}}
+                                 {{studentService.registerFormControl.fname.hasError('required')? 'First name is required':studentService.registerFormControl.fname.hasError('minlength')
+                                  ?'First name should have at least three characters':''}}
                                 </mat-error>
                               </mat-form-field>
                             </div>
@@ -77,7 +78,8 @@
                                 <mat-label>Address Line 1</mat-label>
                                 <input matInput formControlName="line1" required>
                                 <mat-error *ngIf="studentService.registerFormControl.line1.invalid">
-                                  {{studentService.registerFormControl.line1.hasError('minlength')? 'Address should have at least three characters': ''}}
+                                  {{studentService.registerFormControl.line1.hasError('required')? 'Address line 1 is required':studentService.registerFormControl.line1.hasError('minlength')
+                                  ? 'Address should have at least three characters': ''}}
                                 </mat-error>
                               </mat-form-field>
                             </div>
@@ -121,6 +123,9 @@
                           <mat-form-field [style.width.%]=100 appearance="outline">
                             <mat-label>ID Number</mat-label>
                             <input matInput formControlName="nic" required>
+                            <mat-error *ngIf = studentService.registerFormControl.nic.invalid>
+                              {{studentService.registerFormControl.nic.hasError('required')? 'NIC number is required':''}}
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
@@ -131,6 +136,9 @@
                           <mat-form-field [style.width.%]=100 appearance="outline">
                             <mat-label>Birth year</mat-label>
                             <input matInput formControlName="year" required>
+                            <mat-error *ngIf = studentService.registerFormControl.year.invalid>
+                              {{studentService.registerFormControl.year.hasError('required')?'Birth year is requird': ''}}
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
@@ -138,6 +146,9 @@
                           <mat-form-field [style.width.%]=100 appearance="outline">
                             <mat-label>Birth Month</mat-label>
                             <input matInput formControlName="month" required>
+                            <mat-error *ngIf = studentService.registerFormControl.month.invalid>
+                              {{studentService.registerFormControl.month.hasError('required')?'Birth month is requird': ''}}
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
@@ -145,6 +156,9 @@
                           <mat-form-field [style.width.%]=100 appearance="outline">
                             <mat-label>Birth Date</mat-label>
                             <input matInput formControlName="date" required>
+                            <mat-error *ngIf = studentService.registerFormControl.date.invalid>
+                              {{studentService.registerFormControl.date.hasError('required')? 'Birth date is required':''}}
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
@@ -164,6 +178,9 @@
                           <mat-form-field [style.width.%]=100 appearance="outline">
                             <mat-label>DS Division</mat-label>
                             <input matInput formControlName="dsDivision" required>
+                            <mat-error *ngIf = studentService.registerFormControl.dsDivision.invalid>
+                              {{studentService.registerFormControl.dsDivision.hasError('required')? 'Divisional Secretary Division is required':''}}
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
@@ -171,6 +188,9 @@
                           <mat-form-field [style.width.%]=100 appearance="outline">
                             <mat-label>GN Division</mat-label>
                             <input matInput formControlName="gnDivision" required>
+                            <mat-error *ngIf = studentService.registerFormControl.gnDivision.invalid>
+                              {{studentService.registerFormControl.gnDivision.hasError('required')? 'Grama Niladhari Division is required':''}}
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
@@ -181,6 +201,9 @@
                           <mat-form-field [style.width.%]=100 appearance="outline">
                             <mat-label>Language</mat-label>
                             <input matInput formControlName="language" required>
+                            <mat-error *ngIf = studentService.registerFormControl.language.invalid>
+                              {{studentService.registerFormControl.language.hasError('required')? 'Language is required':''}}
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
@@ -188,6 +211,9 @@
                           <mat-form-field [style.width.%]=100 appearance="outline">
                             <mat-label>Experience</mat-label>
                             <input placeholder="1 year 6 months" matInput formControlName="experience" required>
+                            <mat-error *ngIf = studentService.registerFormControl.experience.invalid>
+                              {{studentService.registerFormControl.experience.hasError('required')? 'Experience is required':''}}
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
