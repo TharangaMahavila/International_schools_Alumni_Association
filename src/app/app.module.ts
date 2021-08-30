@@ -17,8 +17,10 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatButtonModule} from "@angular/material/button";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {InterceptorService} from "./service/interceptor.service";
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
     BrowserAnimationsModule,
     MatCardModule,
     FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatCheckboxModule,
     MatRadioModule,
@@ -42,9 +45,16 @@ import {MatExpansionModule} from "@angular/material/expansion";
     ReactiveFormsModule,
     MatFormFieldModule,
     HttpClientModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
-  providers: [StudentService],
+  providers: [StudentService,
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass:InterceptorService,
+          multi:true
+        }
+    ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

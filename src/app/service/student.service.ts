@@ -18,7 +18,6 @@ export class StudentService {
   constructor(private http: HttpClient, private configService: ConfigService) { }
 
   form: FormGroup = new FormGroup({
-    id: new FormControl('',),
     fname: new FormControl('',[Validators.required,Validators.minLength(3),Validators.pattern('[a-zA-Z][a-zA-Z]+')]),
     lname: new FormControl('',[Validators.minLength(3)]),
     oname: new FormControl('',[Validators.minLength(3)]),
@@ -36,9 +35,7 @@ export class StudentService {
     language: new FormControl('',[Validators.required]),
     experience: new FormControl('',[Validators.required]),
     isFollowed: new FormControl(false,[Validators.required]),
-    courseDuration: new FormControl(''),
-    hasImage: new FormControl(false,[Validators.required]),
-    imagePath: new FormControl(''),
+    courseDuration: new FormControl('')
   });
 
   initializeFormGroup(){
@@ -59,10 +56,8 @@ export class StudentService {
       gnDivision: '',
       language: '',
       experience: '',
-      isFollowed: 'false',
-      courseDuration: '',
-      hasImage: 'false',
-      imagePath: ''
+      isFollowed: false,
+      courseDuration: ''
     });
   }
 
@@ -85,9 +80,7 @@ export class StudentService {
       language: student.language,
       experience: student.experience,
       isFollowed: student.isFollowed,
-      courseDuration: student.courseDuration,
-      hasImage: student.hasImage,
-      imagePath: student.hasImage
+      courseDuration: student.courseDuration
     })
   }
 
@@ -99,7 +92,7 @@ export class StudentService {
     return this.http.get<Array<Student>>(this.configService.BASE_URL+`/api/v1/student`,{});
   }
 
-  saveStudent(student: Student,):Observable<Student>{
+  saveStudent(student: Student):Observable<Student>{
     const fd = new FormData();
     if(this.profileImageUrl !== ''){
       fd.append('file',this.selectedImage,this.selectedImage.name);
@@ -107,5 +100,12 @@ export class StudentService {
     }
     fd.append('body',JSON.stringify(student));
     return this.http.post<Student>(this.configService.BASE_URL+`/api/v1/student`,fd);
+  }
+
+  getPdf(id: string){
+    alert(this.configService.BASE_URL+`/api/v1/student/`)
+    return this.http.get(this.configService.BASE_URL+`/api/v1/student/${id}/pdf`,{
+      responseType: 'blob'
+    });
   }
 }

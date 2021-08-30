@@ -4,9 +4,9 @@ import {BehaviorSubject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigService {
+export class LoaderService {
 
-  BASE_URL = 'https://international-school.herokuapp.com';
+  public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 }

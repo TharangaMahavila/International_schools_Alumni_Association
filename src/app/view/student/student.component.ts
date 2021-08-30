@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {StudentService} from "../../service/student.service";
 import {Student} from "../../model/Student";
 import {MatTableDataSource} from "@angular/material/table";
+import {ConfigService} from "../../service/config.service";
+import {FormGroupDirective} from "@angular/forms";
 
 @Component({
   selector: 'app-student',
@@ -15,7 +17,8 @@ export class StudentComponent implements OnInit {
   dataSource = new MatTableDataSource<Student>();
   panelOpenState = false;
 
-  constructor(public studentService: StudentService) { }
+  constructor(public studentService: StudentService,
+              private configService: ConfigService) { }
 
   ngOnInit(): void {
     this.getAllStudents();
@@ -24,6 +27,7 @@ export class StudentComponent implements OnInit {
   getAllStudents(): void{
     this.studentService.getAllStudents().subscribe(value => {
       this.students = value;
+      this.dataSource.data = value;
     },error => {
       alert('Something went wrong')
     });
@@ -41,22 +45,20 @@ export class StudentComponent implements OnInit {
   }
 
   downloadPdf(id: string) {
-    alert(id);
+    window.open(this.configService.BASE_URL+`/api/v1/student/${id}/pdf`, "_blank");
   }
 
-  preventToggle(event: Event) {
-    event.stopPropagation();
-    this.panelOpenState;
-  }
+  registerStudent(formDirective: FormGroupDirective) {
 
-  registerStudent() {
    if(this.studentService.form.valid){
       let student = this.studentService.form.value;
      this.studentService.saveStudent(student).subscribe(value => {
+       this.panelOpenState = false;
        alert("Student saved successfully");
+       this.getAllStudents();
        this.studentService.profileImageUrl = '';
+       formDirective.resetForm();
        this.studentService.form.reset();
-       this.studentService.form.clearValidators();
        this.studentService.initializeFormGroup();
      },error => {
        alert(error.error);
@@ -64,5 +66,13 @@ export class StudentComponent implements OnInit {
    }else {
      alert('Please provide all required fields and valid data.')
    }
+  }
+
+  expansionHeaderClick() {
+    this.panelOpenState = !this.panelOpenState;
+    if (this.panelOpenState === true){
+      this.studentService.form.reset();
+      this.studentService.initializeFormGroup();
+    }
   }
 }
