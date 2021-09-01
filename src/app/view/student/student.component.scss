@@ -109,15 +109,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   display: flex;
 }
 
-.example-element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
-}
-
 .example-element-symbol {
   font-weight: bold;
   font-size: 40px;
@@ -142,7 +133,6 @@ textarea {
 }
 .mobile-table{
   height: 500px;
-  background-color: yellow;
 }
 .mobile-table{
   display: none;
@@ -163,4 +153,8 @@ textarea {
   .mobile-table{
     display: block;
   }
+}
+
+.expanded-row {
+  display: flex;
 }

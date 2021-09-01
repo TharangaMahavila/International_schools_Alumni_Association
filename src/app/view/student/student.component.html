@@ -264,7 +264,7 @@
       <ng-container matColumnDef="Delete">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-fab class="delete-icon" color="primary" aria-label="Example icon button with a delete icon">
+          <button mat-fab class="delete-icon" color="primary" (click)="deleteStudent(element.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -298,7 +298,7 @@
       <ng-container matColumnDef="Delete">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-fab class="delete-icon" color="primary" aria-label="Example icon button with a delete icon">
+          <button mat-fab class="delete-icon" color="primary" (click)="deleteStudent(element.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -309,11 +309,23 @@
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsMobile.length">
           <div class="example-element-detail"
                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-            <div class="example-element-diagram">
-              <div class=""> {{element.oname}} </div>
-              <div class=""> {{element.line2}} </div>
-              <div class=""> {{element.contact}} </div>
-              <div class=""> {{element.nic}} </div>
+            <div class="">
+              <div class="expanded-row">
+                <div style="width: 80px">Gender:</div>
+                <div> {{element.gender.toLowerCase()}} </div>
+              </div>
+              <div class="expanded-row">
+                <div style="width: 80px">Address:</div>
+                <div> {{element.line1 +", "+ element.line2}} </div>
+              </div>
+              <div class="expanded-row">
+                <div style="width: 80px">Contact:</div>
+                <div> {{element.contact}} </div>
+              </div>
+              <div class="expanded-row">
+                <div style="width: 80px">NIC:</div>
+                <div> {{element.nic}} </div>
+              </div>
             </div>
           </div>
         </td>

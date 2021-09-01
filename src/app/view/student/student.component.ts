@@ -86,6 +86,18 @@ export class StudentComponent implements OnInit {
       this.studentService.initializeFormGroup();
     }
   }
+
+  deleteStudent(id: string) {
+    let choise = confirm(`Do you want to delete '${id}' student`);
+    if(choise){
+      this.studentService.deleteStudent(id).subscribe(value => {
+        alert('Successfully deleted the student');
+        this.getAllStudents();
+      },error => {
+        alert('Failed to delete the student');
+      });
+    }
+  }
 }
 
 export interface PeriodicElement {

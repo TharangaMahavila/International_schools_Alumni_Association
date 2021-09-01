@@ -102,6 +102,12 @@ export class StudentService {
     return this.http.post<Student>(this.configService.BASE_URL+`/api/v1/student`,fd);
   }
 
+  deleteStudent(id: string):Observable<any>{
+    return this.http.delete(this.configService.BASE_URL+`/api/v1/student/${id}`,{
+      responseType: "text"
+    });
+  }
+
   getPdf(id: string){
     alert(this.configService.BASE_URL+`/api/v1/student/`)
     return this.http.get(this.configService.BASE_URL+`/api/v1/student/${id}/pdf`,{
